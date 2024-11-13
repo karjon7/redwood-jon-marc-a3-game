@@ -11,7 +11,7 @@ namespace Assignment_3
 {
     public class Bird
     {
-        private Vector2 position;
+        public Vector2 position;
         public Vector2 velocity;
         public int size = 25;
         private int jump_strength = 15;

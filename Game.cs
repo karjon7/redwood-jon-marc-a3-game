@@ -13,6 +13,9 @@ namespace Game10003
     {
         // Place your variables here:
         Bird bird = new Bird(new Vector2(250, 300));
+        Pipe[] pipes = new Pipe[10];
+
+        int pipesPassed = 0;
 
 
 
@@ -22,6 +25,9 @@ namespace Game10003
         public void Setup()
         {
             Window.SetSize(800, 600);
+            Window.TargetFPS = 60;
+
+            pipes[0] = new Pipe(300);
         }
 
         /// <summary>
@@ -32,10 +38,28 @@ namespace Game10003
             Window.ClearBackground(Color.OffWhite);
 
             bird.Update();
+            UpdatePipes();
 
 
         }
 
+        void UpdatePipes() 
+        {
+            for (int i = 0; i < pipes.Length; i++)
+            {
+                Pipe current_pipe = pipes[i];
 
+                if (current_pipe == null) continue;
+
+                current_pipe.Update();
+                
+                if (current_pipe.position.X < bird.position.X && !current_pipe.passed)
+                {
+                    current_pipe.passed = true;
+                    pipesPassed++;
+                }
+                if (current_pipe.position.X < 0 - current_pipe.size) current_pipe = null;
+            }
+        }
     }
 }
