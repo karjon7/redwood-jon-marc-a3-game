@@ -29,7 +29,8 @@ namespace Assignment_3
 
             GetInput();
             UpdateVelocity();
-            
+            CheckWindowCollisions();
+
             DrawBird();
         }
 
@@ -48,9 +49,17 @@ namespace Assignment_3
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Space)) velocity.Y = -jump_strength;
         }
         
+        
         private void UpdateVelocity() 
         {
             position += velocity;
+        }
+
+
+        private void CheckWindowCollisions()
+        {
+            if (position.Y - size < 0) position.Y = 0 + size;
+            // if (position.Y + size > Window.Height) position.Y = Window.Height - size;
         }
     }
 }
