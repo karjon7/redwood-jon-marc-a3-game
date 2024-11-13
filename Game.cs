@@ -12,7 +12,7 @@ namespace Game10003
     public class Game
     {
         // Place your variables here:
-        Bird bird = new Bird(new Vector2(250, 300));
+        Bird bird = new Bird(new Vector2(250, Window.Width / 2));
         Pipe[] pipes = new Pipe[10];
 
         int pipesPassed = 0;
@@ -36,12 +36,21 @@ namespace Game10003
         public void Update()
         {
             Window.ClearBackground(Color.OffWhite);
+            ShowScoreText();
 
             bird.Update();
             UpdatePipes();
 
 
         }
+
+
+        void ShowScoreText()
+        {
+            Text.Size = 50;
+            Text.Draw($"Score: {pipesPassed}", new Vector2(0, 0));
+        }
+
 
         void UpdatePipes() 
         {
