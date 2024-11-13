@@ -1,4 +1,5 @@
 ﻿// Include code libraries you need below (use the namespace).
+using Assignment_3;
 using System;
 using System.Numerics;
 
@@ -11,7 +12,7 @@ namespace Game10003
     public class Game
     {
         // Place your variables here:
-        
+        Bird bird = new Bird(new Vector2(250, 300));
 
 
 
@@ -20,7 +21,7 @@ namespace Game10003
         /// </summary>
         public void Setup()
         {
-
+            Window.SetSize(800, 600);
         }
 
         /// <summary>
@@ -28,7 +29,13 @@ namespace Game10003
         /// </summary>
         public void Update()
         {
+            Window.ClearBackground(Color.OffWhite);
+
+            bird.Update();
+
 
         }
+
+
     }
 }
