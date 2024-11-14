@@ -16,8 +16,8 @@ namespace Game10003
         Pipe[] pipes = new Pipe[10];
 
         int pipesPassed = 0;
-
-
+        float timeSinceLastNewPipe = 5f;
+        float pipeInterval = 5f;
 
         /// <summary>
         ///     Setup runs once before the game loop begins.
@@ -26,8 +26,6 @@ namespace Game10003
         {
             Window.SetSize(800, 600);
             Window.TargetFPS = 60;
-
-            pipes[0] = new Pipe(300);
         }
 
         /// <summary>
@@ -37,10 +35,10 @@ namespace Game10003
         {
             Window.ClearBackground(Color.OffWhite);
             ShowScoreText();
+            ManageTime();
 
             bird.Update();
             UpdatePipes();
-
 
         }
 
@@ -49,6 +47,32 @@ namespace Game10003
         {
             Text.Size = 50;
             Text.Draw($"Score: {pipesPassed}", new Vector2(0, 0));
+        }
+
+
+        void ManageTime()
+        {
+            if (timeSinceLastNewPipe >= pipeInterval)
+            {
+                AddPipe();
+                timeSinceLastNewPipe = 0f;
+            }
+
+            timeSinceLastNewPipe += Time.DeltaTime;
+        }
+
+
+        void AddPipe()
+        {
+            Console.WriteLine("Added Pipe");
+            
+            for (int i = 0; i < pipes.Length; i++)
+            {
+                if (pipes[i] != null) continue;
+
+                pipes[i] = new Pipe(Random.Integer(0, Window.Height + 1));
+                break;
+            }
         }
 
 
